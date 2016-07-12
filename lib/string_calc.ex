@@ -8,15 +8,13 @@ defmodule StringCalc do
     |> Enum.reduce(fn(x, acc) -> x + acc end)
   end
 
-  def parse_nums(numbers) do
-    new_delim = parse_delimiter(numbers)
-    remove_delimiter(new_delim, numbers)
-    |> String.split(@default_delimiters ++ new_delim)
+  def parse_nums("//" <> <<delim::bytes-size(1)>> <> "\n" <> rest) do
+    String.split(rest, @default_delimiters ++ [delim])
   end
 
-  def parse_delimiter(numbers) do
-    Regex.scan(~r{^//(.*)}, numbers, capture: :all_but_first)
-    |> normalize_delimiter
+  def parse_nums(numbers) do
+    IO.puts "HERE"
+    String.split(numbers, @default_delimiters)
   end
 
   def normalize_delimiter([]), do: []
