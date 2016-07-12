@@ -13,16 +13,6 @@ defmodule StringCalc do
   end
 
   def parse_nums(numbers) do
-    IO.puts "HERE"
     String.split(numbers, @default_delimiters)
-  end
-
-  def normalize_delimiter([]), do: []
-  def normalize_delimiter([delimiter]), do: delimiter
-
-  def remove_delimiter([], numbers), do: numbers
-
-  def remove_delimiter(delim, numbers) do
-    Regex.replace(~r{//#{delim}\n}, numbers, "")
   end
 end
